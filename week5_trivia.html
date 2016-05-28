@@ -2,22 +2,37 @@
 <html>
 <head>
   <title>Trivia_week5</title>
-  <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+  <!--<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>-->
+  <!-- offline line -->
+  <script src="offline-link-library/jquery-2.2.3.js"></script>
+
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/darkly/bootstrap.min.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://bootswatch.com/darkly/bootstrap.min.css">-->
+  <link rel="stylesheet" type="text/css" href="offline-link-library/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-<h1 class="theCurrentQuestion"></h1>
-<br>
-<div class="row">
-  <ul class="answersUnOrderedList">
-    <li class="possibleAnswer">The first answer</li>
-    <li class="possibleAnswer">The second answer</li>
-    <li class="possibleAnswer">The third answer</li>
-    <li class="possibleAnswer">The forth answer</li>
-  </ul>
-</div>
- <script type="text/javascript" src = "assets/javascript/app.js"></script>
+
+  <h1 class="theCurrentQuestion"></h1>
+  <br>
+  <div class="row">
+    <ul class="answersUnOrderedList">
+      <li class="possibleAnswer"></li>
+      <li class="possibleAnswer"></li>
+      <li class="possibleAnswer"></li>
+      <li class="possibleAnswer"></li>
+    </ul>
+  </div>
+  <div class="row timer-row">
+    <div class="col-md-4">
+      <button id="submitButton" class="col-md-4 pull-right" text="Submit">Submit</button>
+    </div>
+    <div id="timerDisplay" class="col-md-4 shortTime">30</div>
+    <div class="col-md-4">
+      <button id="resetButton" class="col-md-4 pull-left" text="Reset">Reset</button>
+    </div>
+  </div>
+
+   <script type="text/javascript" src = "assets/javascript/app.js"></script>
 </body>
 </html>
