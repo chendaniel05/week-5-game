@@ -14,40 +14,41 @@ var trivia = [{
                       "Do or do not, there is no try" ],
     correctAnswer: "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
     },{
-    question: "1blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    correctAnswer: "Do or do not, there is no try"
+    question: "Who wrote the Dresdend files? ",
+    possibleAnswers: ["Terry Goodkind" ,
+                      "Terry Brooks",
+                      "Jim Butcher",
+                      "J. R. R. Tolkien" ],
+    correctAnswer: "Jim Butcher"
     },{
-    question: "2blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    correctAnswer: 3
+    question: "What book series was Richard Cypher in? ",
+    possibleAnswers: ["Magic Kingdom for Sale — SOLD! " ,
+                      "The fellowship of the Ring",
+                      "The Sword of Shannara",
+                      "The Sword of Truth" ],
+    correctAnswer: "The Sword of Truth"
     },{
-    question: "3blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    correctAnswer: 4
+    question: "What was the power source for the airships in the High Druid of Shannara? ",
+    possibleAnswers: ["Flux Capacitors" ,
+                      "Dilithium Drystals",
+                      "Diapson Crystals",
+                      "Hot Air" ],
+    correctAnswer: "Diapson Crystals"
     },{
-    question: "4blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    correctAnswer: 5
+    question: "What do the five points of Herry Dresden's pentacle repersent? ",
+    possibleAnswers: ["Air, fire, water, earth and sprit" ,
+                      "Wind, rain, lightning, thunder and air",
+                      "red, blue, green, orange and purple",
+                      "mind, body, soul, life and death" ],
+    correctAnswer: "Air, fire, water, earth and sprit"
     },{
-    question: "5blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    },{
+    question: "What was Zeddicus Zu'l Zorander nickname? ",
+    possibleAnswers: ["Zuli" ,
+                      "Zippy",
+                      "Zedd",
+                      "Zach" ],
+    correctAnswer: "Zedd"
+    }/*,{
     question: "6blah blah? ",
     possibleAnswers: ["Never let them see you be afraid" ,
                       "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
@@ -75,24 +76,28 @@ var trivia = [{
                       "Only an ordained Wizard has the power to not be corrupted by the power",
                       "Do or do not, there is no try" ],
     correctAnswer: 9
-    }];
+    }*/];
 
 
 ///event listeners
 
 $(document).ready(function(){
     $('#resetButton').on("click", function() {
-      reset()
+      restart();
     }) //end #resetButton').on("click"
   displayCurrentQuestion();
   }) //end of $(document).ready
 
 //support functions
-function resart(){
+function restart(){
+  $('.wins').remove();
+  $('.lose').remove();
+  $('.unAns').remove();
   numberOfWins = 0;
   numberOfLoses = 0;
   numberUnAnswered = 0;
   currentQuestionNdx = 0;
+  displayCurrentQuestion();
 }
 
 function initGameArrayChooser(){
@@ -217,12 +222,7 @@ function outputStats(){
   var winText = "Number of correct answers = "+ numberOfWins;
   var loseText = "Number of wrong answers = "+ numberOfLoses;
   var unanswerText = "Number of unanswered questions = "+ numberUnAnswered;
-
-$('#winLose').append("<div class='wins'>"+winText+"</div>");
-
-$('#winLose').append("<div class='lose'>"+loseText+"</div>");
-
-
- $('#winLose').append("<div class='unAns'>"+unanswerText+"</div>")
-
+  $('#winLose').append("<div class='wins'>"+winText+"</div>");
+  $('#winLose').append("<div class='lose'>"+loseText+"</div>");
+  $('#winLose').append("<div class='unAns'>"+unanswerText+"</div>")
 }

@@ -70,3 +70,18 @@ html{
   font-family: monospace;
   text-align: center;
 }
+.wins{
+  font-weight: bold;
+  color:green;
+  font-size: 35px;
+}
+.lose{
+  font-weight: bold;
+  color:red;
+  font-size: 35px;
+}
+.unAns{
+  font-weight: bold;
+  color:black;
+  font-size: 35px;
+}
