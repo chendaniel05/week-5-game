@@ -133,8 +133,8 @@ countDownTimerObj.start();
 //count down timer section
 var timerController;
 var countDownTimerObj= {
-  time:5,
-  setTime:5,
+  time:25,
+  setTime:25,
   reset: function(){
     countDownTimerObj.time = countDownTimerObj.setTime;
     countDownTimerObj.updateDisplay(countDownTimerObj.time);
