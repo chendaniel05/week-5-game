@@ -1,22 +1,25 @@
 //Trivia game JS file -- week 5 homework
 
 //global variables
-var timerCount;
+var  timerCount;
 var  currentQuestionNdx = 0;
+var  numberOfWins = 0;
+var  numberOfLoses = 0;
+var  numberUnAnswered = 0;
 var trivia = [{
     question: "What is the Wizard's First Rule? ",
     possibleAnswers: ["Never let them see you be afraid" ,
                       "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
                       "Only an ordained Wizard has the power to not be corrupted by the power",
                       "Do or do not, there is no try" ],
-    correctAnswer: 1
+    correctAnswer: "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
     },{
     question: "1blah blah? ",
     possibleAnswers: ["Never let them see you be afraid" ,
                       "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
                       "Only an ordained Wizard has the power to not be corrupted by the power",
                       "Do or do not, there is no try" ],
-    correctAnswer: 2
+    correctAnswer: "Do or do not, there is no try"
     },{
     question: "2blah blah? ",
     possibleAnswers: ["Never let them see you be afraid" ,
@@ -81,7 +84,6 @@ var trivia = [{
     correctAnswer: 10
     }];
 
-var gameArrayChooser  = [];
 
 ///event listeners
 
@@ -89,22 +91,17 @@ $(document).ready(function(){
     $('#resetButton').on("click", function() {
       reset()
     }) //end #resetButton').on("click"
-    $('#submitButton').on("click", function() {
-      submit()
-      countDownTimerObj.start();
-    }) //end #submitButton').on("click"
-
-  initGameArrayChooser();
   displayCurrentQuestion();
   }) //end of $(document).ready
 
 //support functions
-function reset(){
-  alert("reset");
+function resart(){
+  numberOfWins = 0;
+  numberOfLoses = 0;
+  numberUnAnswered = 0;
+  currentQuestionNdx = 0;
 }
-function submit(){
-  alert("submit");
-}
+
 function initGameArrayChooser(){
   for (var i = 0; i < trivia.length; i++) {
     gameArrayChooser[i] = i;
@@ -112,9 +109,9 @@ function initGameArrayChooser(){
 }
 
 function newEventListeners(){
-  $('.possibleAnswer').on("click", function(answerClicked) {
-    alert("possibleAnswer).on(click")
-  }) //end possibleAnswer').on("click"
+  $('.possibleAnswer').on("click", function() {
+    checkClickedAnswer(this.textContent);
+    }) //end possibleAnswer').on("click"
 }// newEventListeners()
 
 function displayCurrentQuestion(){
@@ -131,22 +128,15 @@ function displayCurrentQuestion(){
     answer = trivia[currentQuestionNdx].possibleAnswers[i];
     $("<li class='possibleAnswer'> " + answer + "</li>").appendTo(theList)
   }
-gameArrayChooser.splice(currentQuestionNdx,1);
 newEventListeners();
+countDownTimerObj.start();
 }// end displayCurrentQuestion()
-///////////////////////////////////////////////////////////////////////////////
-//solution if you put the whole thing in an object:
-//$(document).ready(function(){
-//  $('#stop').on('click', countDownTimerObj.stop);
-//  $('#reset').on('click', countDownTimerObj.reset);
-//  $('#start').on('click', countDownTimerObj.start);
-//  $('#timerInputSubmit').on('click', countDownTimerObj.inputTime)
-//});
 
+//count down timer section
 var timerController;
 var countDownTimerObj= {
   time:30,
-  setTime:23,
+  setTime:30,
   reset: function(){
     countDownTimerObj.time = countDownTimerObj.setTime;
     countDownTimerObj.updateDisplay(countDownTimerObj.time);
@@ -180,9 +170,52 @@ var countDownTimerObj= {
     if (time<=0) {
       $('#timerDisplay').html(time);
       this.stop();
+      //if time runs out check agianst ""
+      checkClickedAnswer("");
     }
     else{
       $('#timerDisplay').html(time);
     }
   }
-};
+}; //end count down timer section
+
+//check clicked answer
+function checkClickedAnswer(answerClicked){
+  //added .trim() to fix leading spaces problem!!!
+  if(trivia[currentQuestionNdx].correctAnswer === answerClicked.trim()){
+    countDownTimerObj.stop();
+    numberOfWins++;
+    $('#winLose').addClass('winner');
+    $('#winLose').html('&#10004');
+    var resetWinLose = setTimeout(resetWL, 1500);
+  }
+  else if (answerClicked === "") {
+    //unanswered case
+    numberUnAnswered++;
+    countDownTimerObj.stop();
+    $('#winLose').addClass('loser');
+    $('#winLose').html('X');
+    var resetWinLose = setTimeout(resetWL, 1500);
+  }
+  else{
+    numberOfLoses++;
+    countDownTimerObj.stop();
+    $('#winLose').addClass('loser');
+    $('#winLose').html('X');
+    var resetWinLose = setTimeout(resetWL, 1500);
+  }
+}// end check clicked answer
+
+function resetWL(){
+  $('#winLose').removeClass('winner loser');
+  $('#winLose').html('');
+  countDownTimerObj.reset();
+  currentQuestionNdx++;
+  if (currentQuestionNdx> trivia.length) {
+    //output stats and wait for restart button
+  }
+  else{
+    displayCurrentQuestion();
+  }
+
+}

@@ -58,3 +58,15 @@ html{
   border: 2px solid blue;
   color: black;
 }
+.winner{
+  color:green;
+  font-size: 200px;
+  font-family: monospace;
+  text-align: center;
+}
+.loser{
+  color:red;
+  font-size: 200px;
+  font-family: monospace;
+  text-align: center;
+}
