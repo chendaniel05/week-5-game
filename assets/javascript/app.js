@@ -75,13 +75,6 @@ var trivia = [{
                       "Only an ordained Wizard has the power to not be corrupted by the power",
                       "Do or do not, there is no try" ],
     correctAnswer: 9
-    },{
-    question: "10blah blah? ",
-    possibleAnswers: ["Never let them see you be afraid" ,
-                      "People are stupid. They will beleive a lie because they want it to be true or are afraid it might be true",
-                      "Only an ordained Wizard has the power to not be corrupted by the power",
-                      "Do or do not, there is no try" ],
-    correctAnswer: 10
     }];
 
 
@@ -135,8 +128,8 @@ countDownTimerObj.start();
 //count down timer section
 var timerController;
 var countDownTimerObj= {
-  time:30,
-  setTime:30,
+  time:5,
+  setTime:5,
   reset: function(){
     countDownTimerObj.time = countDownTimerObj.setTime;
     countDownTimerObj.updateDisplay(countDownTimerObj.time);
@@ -211,11 +204,25 @@ function resetWL(){
   $('#winLose').html('');
   countDownTimerObj.reset();
   currentQuestionNdx++;
-  if (currentQuestionNdx> trivia.length) {
-    //output stats and wait for restart button
+  if (currentQuestionNdx > trivia.length-1) {
+    countDownTimerObj.stop();
+    outputStats();
   }
   else{
     displayCurrentQuestion();
   }
+}// end resetWL()
+
+function outputStats(){
+  var winText = "Number of correct answers = "+ numberOfWins;
+  var loseText = "Number of wrong answers = "+ numberOfLoses;
+  var unanswerText = "Number of unanswered questions = "+ numberUnAnswered;
+
+$('#winLose').append("<div class='wins'>"+winText+"</div>");
+
+$('#winLose').append("<div class='lose'>"+loseText+"</div>");
+
+
+ $('#winLose').append("<div class='unAns'>"+unanswerText+"</div>")
 
 }
